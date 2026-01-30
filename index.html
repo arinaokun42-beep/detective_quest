@@ -513,12 +513,20 @@
             <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p> 
             <p>Les touches d'un vieux téléphone Nokia peuvent vous aider à trouver la combinaison...</p>
                 
-            <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg.webp">
-            
-            <div style="margin: 20px 0;">
-                <input type="text" id="suspectNamea" placeholder="Entrez le nom du suspect..." 
-                       style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
-            </div>
+          <!-- Suspect ID Image - Centered -->
+    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_1.png" 
+         alt="Suspect 1 ID" 
+         class="suspect-id-image">
+    
+    <!-- Nokia Phone Image - Centered and Properly Sized -->
+    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg.webp" 
+         alt="Nokia Phone" 
+         class="nokia-image">
+    
+    <div style="margin: 20px 0;">
+        <input type="text" id="suspectNamea" placeholder="Entrez le nom du suspect..." 
+               style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
+    </div>
             
             <div class="button-container">
                 <button class="btn" onclick="saveSuspectName('a')">Je suis prêt.e à continuer!</button>
