@@ -154,51 +154,16 @@
             background: #e0b04d;
         }
 
-        /* iOS specific fixes */
         @supports (-webkit-touch-callout: none) {
             .btn {
                 -webkit-tap-highlight-color: rgba(241, 196, 95, 0.3);
             }
         }
 
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn-back {
-            position: absolute;
-            bottom: 15px;
-            left: 20px;
-            background: none;
-            color: #F1C45F;
-            border: none;
-            padding: 10px;
-            font-size: 1em;
-            font-family: 'Special Elite', cursive;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            -webkit-tap-highlight-color: rgba(241, 196, 95, 0.3);
-            touch-action: manipulation;
-            user-select: none;
-            -webkit-user-select: none;
-            font-weight: bold;
-            z-index: 10;
-        }
-
-        .btn-back:hover {
-            color: #ffd76f;
-            transform: translateX(-3px);
-        }
-
-        .btn-back:active {
-            transform: translateX(0);
-            color: #e0b04d;
-        }
-
-        /* Ensure back button doesn't overlap on decoder pages */
-        .page[id^="page5"] .btn-back {
-            bottom: 10px;
+        .btn.selected {
+            background: #d4a530;
+            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(1px);
         }
 
         .icon-gallery {
@@ -292,19 +257,10 @@
             font-family: 'Rubik Dirt', cursive;
         }
 
-        .iframe-container {
-            width: 100%;
-            height: 600px;
-            border: 2px solid #F1C45F;
-            border-radius: 10px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-
-        .iframe-container iframe {
-            width: 100%;
-            height: 100%;
+        .question-divider {
             border: none;
+            border-top: 2px dashed #ccc;
+            margin: 40px 0 10px 0;
         }
 
         .content-image {
@@ -348,11 +304,6 @@
             font-family: 'Special Elite', cursive;
         }
 
-        .result-explanation {
-            color: #666;
-            line-height: 1.6;
-        }
-
         .button-container {
             display: flex;
             justify-content: center;
@@ -391,114 +342,113 @@
 </head>
 <body>
     <div class="container">
+
         <!-- Page 1: Introduction -->
         <div class="page active" id="page1">
             <h1>Bienvenue, détective</h1>
-            <p>Vous intégrez une unité spéciale chargée d'une affaire sensible liée à un réseau clandestin opérant en ville. Les traces existent — mais elles ont été soigneusement dissimulées. </p>
+            <p>Vous intégrez une unité spéciale chargée d'une affaire sensible liée à un réseau clandestin opérant en ville. Les traces existent — mais elles ont été soigneusement dissimulées.</p>
             <p>Votre mission : recouper les indices et identifier qui a tué le chef de mafia.</p>
             <div class="button-container">
                 <button class="btn" onclick="goToPage(2)">Je suis prêt.e</button>
             </div>
         </div>
 
-        <!-- Page 2: Crime Scene -->
+        <!-- Page 2: Crime Scene — 3 questions on one page -->
         <div class="page" id="page2">
             <h2>Étape 1 : trouver la scène du crime</h2>
             <p>Vous pouvez obtenir l'accès à une information classifiée si vous fournissez la bonne réponse.</p>
             <p>Regardez cette scène du premier épisode et devinez ce qui se passe ici. Pour répondre correctement, soyez attentif au cinéma !</p>
-            
-          <div style="display: flex; justify-content: center; margin: 30px 0;">
-    <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene.jpeg')">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene.jpeg" alt="Crime Scene">
-    </div>
-</div>
+
+            <!-- Question 1 -->
+            <div style="display: flex; justify-content: center; margin: 30px 0;">
+                <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene.jpeg')">
+                    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene.jpeg" alt="Crime Scene">
+                </div>
+            </div>
 
             <div class="question">Que fait Teddy ?</div>
-            
-            <div class="choices">
-                <button class="btn" onclick="q1 = false">Teddy recherche un criminel en fuite</button>
-                <button class="btn" onclick="q1 = false">Teddy cache actuellement un sac de substances illégales</button>
-                <button class="btn" onclick="q1 = true">Teddy recherche des traces de sang étranges</button>
+
+            <div class="choices" id="choices1">
+                <button class="btn" onclick="selectQ(1, this, false)">Teddy recherche un criminel en fuite</button>
+                <button class="btn" onclick="selectQ(1, this, false)">Teddy cache actuellement un sac de substances illégales</button>
+                <button class="btn" onclick="selectQ(1, this, true)">Teddy recherche des traces de sang étranges</button>
             </div>
 
             <!-- Question 2 -->
-            <div style="text-align: center; margin-top: 40px;">
-               <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_1.jpeg')">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_1.jpeg" alt="Crime Scene">
-    </div>
-</div>
+            <hr class="question-divider">
+
+            <div style="display: flex; justify-content: center; margin: 30px 0;">
+                <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_1.jpeg')">
+                    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_1.jpeg" alt="Crime Scene 2">
+                </div>
+            </div>
 
             <div class="question">Comment Avi accepte-t-il de travailler avec Franklin ?</div>
-            
-            <div class="choices">
-                <button class="btn" onclick="q2 = false">Franklin partage ses drogues avec lui</button>
-                <button class="btn" onclick="q2 = true">Franklin permet à Avi de lui tirer dessus</button>
-                <button class="btn" onclick="q2 = false">Franklin bat Avi en combat</button>
+
+            <div class="choices" id="choices2">
+                <button class="btn" onclick="selectQ(2, this, false)">Franklin partage ses drogues avec lui</button>
+                <button class="btn" onclick="selectQ(2, this, true)">Franklin permet à Avi de lui tirer dessus</button>
+                <button class="btn" onclick="selectQ(2, this, false)">Franklin bat Avi en combat</button>
             </div>
 
             <!-- Question 3 -->
-            <div style="text-align: center; margin-top: 40px;">
-               <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_2.jpeg')">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_2.jpeg" alt="Crime Scene">
+            <hr class="question-divider">
+
+            <div style="display: flex; justify-content: center; margin: 30px 0;">
+                <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_2.jpeg')">
+                    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_2.jpeg" alt="Crime Scene 3">
+                </div>
             </div>
 
             <div class="question">Que veulent ces deux à Franklin ?</div>
-            
-            <div class="choices">
-                <button class="btn" onclick="q3 = false; checkAnswers()">Ils achètent sa moto</button>
-                <button class="btn" onclick="q3 = false; checkAnswers()">Ils lui vendent une arme à feu</button>
-                <button class="btn" onclick="q3 = true; checkAnswers()">Ils lui volent son argent</button>
+
+            <div class="choices" id="choices3">
+                <button class="btn" onclick="selectQ(3, this, false)">Ils achètent sa moto</button>
+                <button class="btn" onclick="selectQ(3, this, false)">Ils lui vendent une arme à feu</button>
+                <button class="btn" onclick="selectQ(3, this, true)">Ils lui volent son argent</button>
+            </div>
+
+            <!-- Confirmation -->
+            <p style="text-align: center; margin-top: 40px;">Prêt à continuer ?</p>
+            <div class="button-container">
+                <button class="btn" onclick="checkAnswers()">Je suis prêt.e</button>
             </div>
         </div>
 
-        <!-- Page 3a: Wrong Answer 1 - Restaurant -->
+        <!-- Page 3a: Wrong Answer -->
         <div class="page" id="page3a">
-            <button class="btn-back" onclick="goToPage(2)">← Retour</button>
-            <h2>Réponse acceptée ! </h2>
+            <h2>Réponse acceptée !</h2>
             <p>Grâce aux informations que vous nous avez fournies, nous savons désormais que le meurtre a eu lieu <span style="color: #BA1F33"><b>au restaurant de luxe préféré du chef de la mafia</b></span>.</p>
             <p>Prêt à continuer ?</p>
             <div class="button-container">
-<button class="btn" onclick="selectChoice(1, 'au restaurant de luxe préféré du chef de la mafia'); goToPage(4)">Je suis prêt.e</button>            
+                <button class="btn" onclick="selectChoice(1, 'au restaurant de luxe préféré du chef de la mafia'); goToPage(4)">Je suis prêt.e</button>
             </div>
         </div>
 
-        <!-- Page 3b: Wrong Answer 2 - Parking -->
-        <div class="page" id="page3b">
-            <button class="btn-back" onclick="goToPage(2)">← Retour</button>
-            <h2>Réponse acceptée ! </h2>
-            <p>Grâce aux informations que vous nous avez fournies, nous savons désormais que le meurtre a eu lieu <span style="color: #BA1F33"><b>dans le parking d'un hôtel de luxe</b></span>.</p>
-            <p>Prêt à continuer ?</p>
-            <div class="button-container">
-<button class="btn" onclick="selectChoice(1, 'dans le parking d\'un hôtel de luxe'); goToPage(4)">Je suis prêt.e</button>            
-            </div>
-        </div>
-
-        <!-- Page 3c: Correct Answer - Villa -->
+        <!-- Page 3c: Correct Answer -->
         <div class="page" id="page3c">
-            <button class="btn-back" onclick="goToPage(2)">← Retour</button>
-            <h2>Réponse acceptée ! </h2>
+            <h2>Réponse acceptée !</h2>
             <p>Grâce aux informations que vous nous avez fournies, nous savons désormais que le meurtre a eu lieu <span style="color: #BA1F33"><b>dans la villa du chef mafieux</b></span>.</p>
             <p>Prêt à continuer ?</p>
             <div class="button-container">
-<button class="btn" onclick="selectChoice(1, 'dans la villa du chef mafieux'); goToPage(4)">Je suis prêt.e</button>            
+                <button class="btn" onclick="selectChoice(1, 'dans la villa du chef mafieux'); goToPage(4)">Je suis prêt.e</button>
             </div>
         </div>
 
         <!-- Page 4: Fingerprint Analysis -->
         <div class="page" id="page4">
-            <button class="btn-back" onclick="goBack()">← Retour</button>
             <h2>Étape 2 : déterminer le meurtrier</h2>
-            <p>Vous disposez d'un scan des empreintes digitales laissées sur les lieux.</p> 
+            <p>Vous disposez d'un scan des empreintes digitales laissées sur les lieux.</p>
             <p>Comparez-les avec celles que nous avons dans nos fichiers sur les gangsters les plus recherchés de cette ville, et trouvez qui se trouvait sur les lieux du crime la nuit du meurtre !</p>
             <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/fingerprint_1.jpg" 
-             alt="Fingerprint" 
-             style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-    </div>
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/fingerprint_1.jpg"
+                     alt="Fingerprint"
+                     style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            </div>
             <div class="icon-gallery">
                 <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_1.png')">
-    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_1.png" alt="Fingerprint 1">
-    <p>1</p>
+                    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_1.png" alt="Fingerprint 1">
+                    <p>1</p>
                 </div>
                 <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_2.png')">
                     <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_2.png" alt="Fingerprint 2">
@@ -516,18 +466,18 @@
                     <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_5.png" alt="Fingerprint 5">
                     <p>5</p>
                 </div>
-                 <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_6.png')">
-    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_6.png" alt="Fingerprint 6">
+                <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_6.png')">
+                    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_6.png" alt="Fingerprint 6">
                     <p>6</p>
                 </div>
-                 <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_7.png')">
-    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_7.png" alt="Fingerprint 7">
+                <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_7.png')">
+                    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_7.png" alt="Fingerprint 7">
                     <p>7</p>
                 </div>
             </div>
 
             <div class="question">Quel suspect était sur les lieux ?</div>
-            
+
             <div class="choices">
                 <button class="btn" onclick="selectChoice(2, 'Suspect 1'); goToPage('5a')">1</button>
                 <button class="btn" onclick="selectChoice(2, 'Suspect 2'); goToPage('5b')">2</button>
@@ -540,62 +490,48 @@
         </div>
 
         <!-- Page 5a: Decoder for Suspect 1 -->
-<div class="page" id="page5a">
-    <button class="btn-back" onclick="goToPage(4)">← Retour</button>
-    <h2>Trouvons le nom de votre suspect !</h2>
-    <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p> 
-    <p>Les touches d'un vieux téléphone Nokia peuvent vous aider à trouver la combinaison...</p>
-        
-    <!-- Suspect ID Image - Centered -->
-    <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_1.png" 
-             alt="Suspect 1 ID" 
-             style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-    </div>
-    
-    <!-- Nokia Phone Image - Centered and Properly Sized -->
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg" 
-             alt="Nokia Phone" 
-             style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-    </div>
-    
-    <div style="margin: 20px 0;">
-        <input type="text" id="suspectNamea" placeholder="Entrez le nom du suspect..." 
-               style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
-    </div>
-            
-    <div class="button-container">
-        <button class="btn" onclick="saveSuspectName('a')">Je suis prêt.e à continuer!</button>
-    </div>
-</div>
+        <div class="page" id="page5a">
+            <h2>Trouvons le nom de votre suspect !</h2>
+            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p>
+            <p>Les touches d'un vieux téléphone Nokia peuvent vous aider à trouver la combinaison...</p>
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_1.png"
+                     alt="Suspect 1 ID"
+                     style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg"
+                     alt="Nokia Phone"
+                     style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
+            <div style="margin: 20px 0;">
+                <input type="text" id="suspectNamea" placeholder="Entrez le nom du suspect..."
+                       style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
+            </div>
+            <div class="button-container">
+                <button class="btn" onclick="saveSuspectName('a')">Je suis prêt.e à continuer!</button>
+            </div>
+        </div>
 
         <!-- Page 5b: Decoder for Suspect 2 -->
         <div class="page" id="page5b">
-            <button class="btn-back" onclick="goToPage(4)">← Retour</button>
             <h2>Trouvons le nom de votre suspect !</h2>
-            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p> 
+            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p>
             <p>Les touches d'un vieux téléphone Nokia peuvent vous aider à trouver la combinaison...</p>
-            
-            <!-- Suspect ID Image - Centered -->
-    <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_2.png" 
-             alt="Suspect 2 ID" 
-             style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-    </div>
-    
-    <!-- Nokia Phone Image - Centered and Properly Sized -->
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg" 
-             alt="Nokia Phone" 
-             style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-    </div>
-            
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_2.png"
+                     alt="Suspect 2 ID"
+                     style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg"
+                     alt="Nokia Phone"
+                     style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
             <div style="margin: 20px 0;">
-                <input type="text" id="suspectNameb" placeholder="Entrez le nom du suspect..." 
+                <input type="text" id="suspectNameb" placeholder="Entrez le nom du suspect..."
                        style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
             </div>
-            
             <div class="button-container">
                 <button class="btn" onclick="saveSuspectName('b')">Je suis prêt.e à continuer!</button>
             </div>
@@ -603,30 +539,23 @@
 
         <!-- Page 5c: Decoder for Suspect 3 -->
         <div class="page" id="page5c">
-            <button class="btn-back" onclick="goToPage(4)">← Retour</button>
             <h2>Trouvons le nom de votre suspect !</h2>
-            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p> 
+            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p>
             <p>Les touches d'un vieux téléphone Nokia peuvent vous aider à trouver la combinaison...</p>
-            
-<!-- Suspect ID Image - Centered -->
-    <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_3.png" 
-             alt="Suspect 3 ID" 
-             style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-    </div>
-    
-    <!-- Nokia Phone Image - Centered and Properly Sized -->
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg" 
-             alt="Nokia Phone" 
-             style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-    </div>
-            
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_3.png"
+                     alt="Suspect 3 ID"
+                     style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg"
+                     alt="Nokia Phone"
+                     style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
             <div style="margin: 20px 0;">
-                <input type="text" id="suspectNamec" placeholder="Entrez le nom du suspect..." 
+                <input type="text" id="suspectNamec" placeholder="Entrez le nom du suspect..."
                        style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
             </div>
-            
             <div class="button-container">
                 <button class="btn" onclick="saveSuspectName('c')">Je suis prêt.e à continuer!</button>
             </div>
@@ -634,30 +563,23 @@
 
         <!-- Page 5d: Decoder for Suspect 4 -->
         <div class="page" id="page5d">
-            <button class="btn-back" onclick="goToPage(4)">← Retour</button>
             <h2>Trouvons le nom de votre suspect !</h2>
-            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p> 
+            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p>
             <p>Les touches d'un vieux téléphone Nokia peuvent vous aider à trouver la combinaison...</p>
-            
-<!-- Suspect ID Image - Centered -->
-    <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_4.png" 
-             alt="Suspect 4 ID" 
-             style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-    </div>
-    
-    <!-- Nokia Phone Image - Centered and Properly Sized -->
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg" 
-             alt="Nokia Phone" 
-             style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-    </div>
-            
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_4.png"
+                     alt="Suspect 4 ID"
+                     style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg"
+                     alt="Nokia Phone"
+                     style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
             <div style="margin: 20px 0;">
-                <input type="text" id="suspectNamed" placeholder="Entrez le nom du suspect..." 
+                <input type="text" id="suspectNamed" placeholder="Entrez le nom du suspect..."
                        style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
             </div>
-            
             <div class="button-container">
                 <button class="btn" onclick="saveSuspectName('d')">Je suis prêt.e à continuer!</button>
             </div>
@@ -665,30 +587,23 @@
 
         <!-- Page 5e: Decoder for Suspect 5 -->
         <div class="page" id="page5e">
-            <button class="btn-back" onclick="goToPage(4)">← Retour</button>
             <h2>Trouvons le nom de votre suspect !</h2>
-            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p> 
+            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p>
             <p>Les touches d'un vieux téléphone Nokia peuvent vous aider à trouver la combinaison...</p>
-            
-<!-- Suspect ID Image - Centered -->
-    <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_5.png" 
-             alt="Suspect 5 ID" 
-             style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-    </div>
-    
-    <!-- Nokia Phone Image - Centered and Properly Sized -->
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg" 
-             alt="Nokia Phone" 
-             style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-    </div>
-            
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_5.png"
+                     alt="Suspect 5 ID"
+                     style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg"
+                     alt="Nokia Phone"
+                     style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
             <div style="margin: 20px 0;">
-                <input type="text" id="suspectNamee" placeholder="Entrez le nom du suspect..." 
+                <input type="text" id="suspectNamee" placeholder="Entrez le nom du suspect..."
                        style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
             </div>
-            
             <div class="button-container">
                 <button class="btn" onclick="saveSuspectName('e')">Je suis prêt.e à continuer!</button>
             </div>
@@ -696,30 +611,23 @@
 
         <!-- Page 5f: Decoder for Suspect 6 -->
         <div class="page" id="page5f">
-            <button class="btn-back" onclick="goToPage(4)">← Retour</button>
             <h2>Trouvons le nom de votre suspect !</h2>
-            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p> 
+            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p>
             <p>Les touches d'un vieux téléphone Nokia peuvent vous aider à trouver la combinaison...</p>
-            
-<!-- Suspect ID Image - Centered -->
-    <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_6.png" 
-             alt="Suspect 6 ID" 
-             style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-    </div>
-    
-    <!-- Nokia Phone Image - Centered and Properly Sized -->
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg" 
-             alt="Nokia Phone" 
-             style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-    </div>
-            
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_6.png"
+                     alt="Suspect 6 ID"
+                     style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg"
+                     alt="Nokia Phone"
+                     style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
             <div style="margin: 20px 0;">
-                <input type="text" id="suspectNamef" placeholder="Entrez le nom du suspect..." 
+                <input type="text" id="suspectNamef" placeholder="Entrez le nom du suspect..."
                        style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
             </div>
-            
             <div class="button-container">
                 <button class="btn" onclick="saveSuspectName('f')">Je suis prêt.e à continuer!</button>
             </div>
@@ -727,49 +635,39 @@
 
         <!-- Page 5g: Decoder for Suspect 7 -->
         <div class="page" id="page5g">
-            <button class="btn-back" onclick="goToPage(4)">← Retour</button>
             <h2>Trouvons le nom de votre suspect !</h2>
-            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p> 
+            <p>Le nom du suspect est écrit en code. Pouvez-vous le déchiffrer ?</p>
             <p>Les touches d'un vieux téléphone Nokia peuvent vous aider à trouver la combinaison...</p>
-            
-<!-- Suspect ID Image - Centered -->
-    <div style="text-align: center;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_7.png" 
-             alt="Suspect 7 ID" 
-             style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-    </div>
-    
-    <!-- Nokia Phone Image - Centered and Properly Sized -->
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg" 
-             alt="Nokia Phone" 
-             style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-    </div>
-            
+            <div style="text-align: center;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/id_7.png"
+                     alt="Suspect 7 ID"
+                     style="max-width: 400px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/nokia.jpeg"
+                     alt="Nokia Phone"
+                     style="max-width: 300px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            </div>
             <div style="margin: 20px 0;">
-                <input type="text" id="suspectNameg" placeholder="Entrez le nom du suspect..." 
+                <input type="text" id="suspectNameg" placeholder="Entrez le nom du suspect..."
                        style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.1em; font-family: 'Special Elite', cursive; border: 2px solid #F1C45F; border-radius: 10px; margin: 10px auto; display: block;">
             </div>
-            
             <div class="button-container">
                 <button class="btn" onclick="saveSuspectName('g')">Je suis prêt.e à continuer!</button>
             </div>
         </div>
 
-
-
         <!-- Page 6: Weapon Selection -->
         <div class="page" id="page6">
-            <button class="btn-back" onclick="goBack()">← Retour</button>
             <h2>Étape 3 : Trouvez l'arme du crime</h2>
             <p>Nous connaissons six armes possibles qui ont été conservées près de la scène du crime.</p>
             <p>Parcourez le hall et recherchez-les toutes : vous les trouverez sous forme d'autocollants sur les murs.</p>
             <p>Si l'une des armes manque, cela signifie qu'elle a été utilisée et jetée par le criminel !</p>
-            
+
             <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/weapons.png" alt="Crime Weapons" class="content-image" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/weapons.png')">
-            
+
             <div class="question">Quelle arme manque ?</div>
-            
+
             <div class="choices">
                 <button class="btn" onclick="selectChoice(3, 'un couteau'); goToPage(7)">Un couteau</button>
                 <button class="btn" onclick="selectChoice(3, 'une corde'); goToPage(7)">Une corde</button>
@@ -782,17 +680,17 @@
 
         <!-- Page 7: Results Summary -->
         <div class="page" id="page7">
-            <h1>Enquête Terminée !</h1>
+            <h1>Enquête Terminée ! 🎉</h1>
             <p>Félicitations d'avoir terminé l'enquête ! Voici un résumé de votre parcours et des choix que vous avez faits.</p>
-            
+
             <div class="results-list" id="resultsList">
-                <!-- Results will be populated here by JavaScript -->
             </div>
 
             <div class="final-instruction">
                 <span style="color: #BA1F33">Maintenant, présentez les résultats de votre investigation au shérif de la ville !</span>
             </div>
         </div>
+
     </div>
 
     <!-- Modal for Image Viewing -->
@@ -804,27 +702,37 @@
     </div>
 
     <script>
-        // Store user choices
         let userChoices = [];
-        let pageHistory = [1]; // Track page history for back button
+        let pageHistory = [1];
 
-        // Question texts for the results page
         const questions = {
             1: "Étape 1 : Lieu du crime",
             2: "Étape 2 : Nom du suspect",
             3: "Étape 3 : Arme du crime"
         };
 
-        // Explanations for each choice (removed for cleaner results)
-        const explanations = {
-            1: {},
-            2: {},
-            3: {}
-        };
-let q1 = null;
+        // Tracks correct/incorrect for the 3 sub-questions on page 2
+        let q1 = null;
         let q2 = null;
         let q3 = null;
 
+        // Called when player clicks a multiple choice button on page 2.
+        // Highlights it, deselects the others in the same group, and records true/false.
+        function selectQ(num, clickedBtn, isCorrect) {
+            if (num === 1) q1 = isCorrect;
+            if (num === 2) q2 = isCorrect;
+            if (num === 3) q3 = isCorrect;
+
+            var group = document.getElementById('choices' + num);
+            var btns = group.querySelectorAll('.btn');
+            btns.forEach(function(btn) {
+                btn.classList.remove('selected');
+            });
+            clickedBtn.classList.add('selected');
+        }
+
+        // Called by the "Je suis prêt.e" button after all 3 questions.
+        // Checks all three answers and routes to correct or wrong result page.
         function checkAnswers() {
             if (q1 === true && q2 === true && q3 === true) {
                 goToPage('3c');
@@ -832,75 +740,34 @@ let q1 = null;
                 goToPage('3a');
             }
         }
+
         function goToPage(pageNumber) {
-            // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
-            
-            // Show the target page (handle both numbers and strings like '3a')
+
             const targetPage = document.getElementById('page' + pageNumber);
             if (targetPage) {
                 targetPage.classList.add('active');
-                // Add to history if not going back
                 pageHistory.push(pageNumber);
             }
-            
-            // Scroll to top
+
             window.scrollTo(0, 0);
         }
 
-        function goBack() {
-            // Remove current page from history
-            if (pageHistory.length > 1) {
-                pageHistory.pop();
-                const previousPage = pageHistory[pageHistory.length - 1];
-                
-                // Hide all pages
-                document.querySelectorAll('.page').forEach(page => {
-                    page.classList.remove('active');
-                });
-                
-                // Show previous page
-                const targetPage = document.getElementById('page' + previousPage);
-                if (targetPage) {
-                    targetPage.classList.add('active');
-                }
-                
-                // Scroll to top
-                window.scrollTo(0, 0);
-            }
-        }
-
         function selectChoice(questionNumber, choice) {
-            // Store the choice
             userChoices[questionNumber] = choice;
-            
-            // Determine next page based on original flow
-            let nextPage;
-            if (questionNumber === 1) {
-                // This is handled by button onclick now
-                return;
-            } else if (questionNumber === 2) {
-                // This is handled by button onclick now
-                return;
-            } else if (questionNumber === 3) {
-                // Generate results and go to final page
+
+            if (questionNumber === 3) {
                 generateResults();
-                nextPage = 7;
-                goToPage(nextPage);
+                goToPage(7);
             }
         }
 
         function saveSuspectName(pageId) {
-            // Get the text input value
             const inputId = 'suspectName' + pageId;
             const suspectName = document.getElementById(inputId).value;
-            
-            // Store it in userChoices as question 2
             userChoices[2] = suspectName;
-            
-            // Go to page 6
             goToPage(6);
         }
 
@@ -913,14 +780,12 @@ let q1 = null;
             document.getElementById('imageModal').classList.remove('active');
         }
 
-        // Close modal when clicking outside the image
         document.getElementById('imageModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
-        // Add touch event support for mobile
         document.getElementById('imageModal').addEventListener('touchend', function(e) {
             if (e.target === this) {
                 closeModal();
@@ -930,24 +795,22 @@ let q1 = null;
         function generateResults() {
             const resultsContainer = document.getElementById('resultsList');
             resultsContainer.innerHTML = '';
-            
-            // Loop through all choices and display only answers
+
             for (let i = 1; i <= 3; i++) {
                 if (userChoices[i]) {
                     const resultItem = document.createElement('div');
                     resultItem.className = 'result-item';
-                    
+
                     const questionDiv = document.createElement('div');
                     questionDiv.className = 'result-question';
                     questionDiv.textContent = questions[i];
-                    
+
                     const answerDiv = document.createElement('div');
                     answerDiv.className = 'result-answer';
                     answerDiv.textContent = 'Votre choix : ' + userChoices[i];
-                    
+
                     resultItem.appendChild(questionDiv);
                     resultItem.appendChild(answerDiv);
-                    
                     resultsContainer.appendChild(resultItem);
                 }
             }
@@ -956,10 +819,12 @@ let q1 = null;
         function resetQuest() {
             userChoices = [];
             pageHistory = [1];
+            q1 = null;
+            q2 = null;
+            q3 = null;
             goToPage(1);
         }
 
-        // Prevent navigation away from the quest
         window.addEventListener('beforeunload', function(e) {
             if (userChoices.length > 0) {
                 e.preventDefault();
