@@ -785,13 +785,13 @@
         }
 
         function selectChoice(questionNumber, choice) {
-            userChoices[questionNumber] = choice;
+    userChoices[questionNumber] = choice;
 
-            if (questionNumber === 3) {
-                generateResults();
-                goToPage(7);
-            }
-        }
+    if (questionNumber === 4) {
+        generateResults();
+        goToPage(7);
+    }
+}
 
         function saveSuspectName(pageId) {
             const inputId = 'suspectName' + pageId;
@@ -804,7 +804,7 @@ function selectWeaponAndRoute(weapon) {
     selectChoice(3, weapon);
     
     // Check if crime scene answer was correct (villa) or wrong (restaurant)
-    if (userChoices[1] === 'dans la villa du chef mafieux') {
+    if (userChoices[1] === 'la villa du chef mafieux') {
         goToPage('6c'); // Correct version
     } else {
         goToPage('6a'); // Wrong version
@@ -836,7 +836,7 @@ function selectWeaponAndRoute(weapon) {
             const resultsContainer = document.getElementById('resultsList');
             resultsContainer.innerHTML = '';
 
-            for (let i = 1; i <= 3; i++) {
+            for (let i = 1; i <= 4; i++) {
                 if (userChoices[i]) {
                     const resultItem = document.createElement('div');
                     resultItem.className = 'result-item';
