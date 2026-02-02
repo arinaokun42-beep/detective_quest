@@ -354,66 +354,73 @@
             </div>
         </div>
 
-        <!-- Page 2: Crime Scene — 3 questions on one page -->
-        <div class="page" id="page2">
-            <h2>Étape 1 : trouver la scène du crime</h2>
-            <p>Vous pouvez accéder à une information classifiée si vous répondez correctement aux questions suivantes.</p>
-            <p>Regardez ces scènes des deux premiers épisodes. Soyez attentif.ve aux détails !</p>
+       The problem is that Questions 2 and 3 still have the <div class="icon-item"> wrapper, which applies the gallery styling (small thumbnail size). Question 1 doesn't have it, which is why it displays as a regular centered image.
+Replace your entire Page 2 code with this:
+html<!-- Page 2: Crime Scene — 3 questions on one page -->
+<div class="page" id="page2">
+    <h2>Étape 1 : trouver la scène du crime</h2>
+    <p>Vous pouvez accéder à une information classifiée si vous répondez correctement aux questions suivantes.</p>
+    <p>Regardez ces scènes des deux premiers épisodes. Soyez attentif.ve aux détails !</p>
 
-            <!-- Question 1 -->
-            <div style="display: flex; justify-content: center; margin: 30px 0;">
-                    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene.jpeg" alt="Crime Scene">
-            </div>
+    <!-- Question 1 -->
+    <div style="text-align: center; margin: 30px 0;">
+        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene.jpeg" 
+             alt="Crime Scene"
+             style="max-width: 600px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer;"
+             onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene.jpeg')">
+    </div>
 
-            <div class="question">Que fait Teddy ?</div>
+    <div class="question">Que fait Teddy ?</div>
 
-            <div class="choices" id="choices1">
-                <button class="btn" onclick="selectQ(1, this, false)">Teddy recherche un criminel en fuite</button>
-                <button class="btn" onclick="selectQ(1, this, false)">Teddy cache un sac de substances illégales</button>
-                <button class="btn" onclick="selectQ(1, this, true)">Teddy examine des traces de sang étranges</button>
-            </div>
+    <div class="choices" id="choices1">
+        <button class="btn" onclick="selectQ(1, this, false)">Teddy recherche un criminel en fuite</button>
+        <button class="btn" onclick="selectQ(1, this, false)">Teddy cache un sac de substances illégales</button>
+        <button class="btn" onclick="selectQ(1, this, true)">Teddy examine des traces de sang étranges</button>
+    </div>
 
-            <!-- Question 2 -->
-            <hr class="question-divider">
+    <!-- Question 2 -->
+    <hr class="question-divider">
 
-            <div style="display: flex; justify-content: center; margin: 30px 0;">
-                <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_1.jpeg')">
-                    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_1.jpeg" alt="Crime Scene 2">
-                </div>
-            </div>
+    <div style="text-align: center; margin: 30px 0;">
+        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_1.jpeg" 
+             alt="Crime Scene 2"
+             style="max-width: 600px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer;"
+             onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_1.jpeg')">
+    </div>
 
-            <div class="question">Comment Avi accepte-t-il de travailler avec Franklin ?</div>
+    <div class="question">Comment Avi accepte-t-il de travailler avec Franklin ?</div>
 
-            <div class="choices" id="choices2">
-                <button class="btn" onclick="selectQ(2, this, false)">Franklin partage ses drogues avec lui</button>
-                <button class="btn" onclick="selectQ(2, this, true)">Franklin accepte de se faire tirer dessus par Avi</button>
-                <button class="btn" onclick="selectQ(2, this, false)">Franklin bat Avi en combat</button>
-            </div>
+    <div class="choices" id="choices2">
+        <button class="btn" onclick="selectQ(2, this, false)">Franklin partage ses drogues avec lui</button>
+        <button class="btn" onclick="selectQ(2, this, true)">Franklin accepte de se faire tirer dessus par Avi</button>
+        <button class="btn" onclick="selectQ(2, this, false)">Franklin bat Avi en combat</button>
+    </div>
 
-            <!-- Question 3 -->
-            <hr class="question-divider">
+    <!-- Question 3 -->
+    <hr class="question-divider">
 
-            <div style="display: flex; justify-content: center; margin: 30px 0;">
-                <div class="icon-item" onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_2.jpeg')">
-                    <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_2.jpeg" alt="Crime Scene 3">
-                </div>
-            </div>
+    <div style="text-align: center; margin: 30px 0;">
+        <img src="https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_2.jpeg" 
+             alt="Crime Scene 3"
+             style="max-width: 600px; width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer;"
+             onclick="openModal('https://raw.githubusercontent.com/arinaokun42-beep/detective_quest/main/images/crime_scene_2.jpeg')">
+    </div>
 
-            <div class="question">Que veulent ces deux types à Franklin ?</div>
+    <div class="question">Que veulent ces deux types à Franklin ?</div>
 
-            <div class="choices" id="choices3">
-                <button class="btn" onclick="selectQ(3, this, false)">Ils achètent sa moto</button>
-                <button class="btn" onclick="selectQ(3, this, false)">Ils lui vendent une arme à feu</button>
-                <button class="btn" onclick="selectQ(3, this, true)">Ils lui volent son argent</button>
-            </div>
+    <div class="choices" id="choices3">
+        <button class="btn" onclick="selectQ(3, this, false)">Ils achètent sa moto</button>
+        <button class="btn" onclick="selectQ(3, this, false)">Ils lui vendent une arme à feu</button>
+        <button class="btn" onclick="selectQ(3, this, true)">Ils lui volent son argent</button>
+    </div>
 
-            <!-- Confirmation -->
-            <p style="text-align: center; margin-top: 40px;">Prêt.e à continuer ?</p>
-            <div class="button-container">
-                <button class="btn" onclick="checkAnswers()">Je suis prêt.e</button>
-            </div>
-        </div>
-
+    <!-- Confirmation -->
+    <p style="text-align: center; margin-top: 40px;">Prêt.e à continuer ?</p>
+    <div class="button-container">
+        <button class="btn" onclick="checkAnswers()">Je suis prêt.e</button>
+    </div>
+</div>
+           
         <!-- Page 3a: Wrong Answer -->
         <div class="page" id="page3a">
             <h2>Réponse acceptée !</h2>
