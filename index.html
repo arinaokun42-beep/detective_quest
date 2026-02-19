@@ -922,25 +922,12 @@ function selectWeaponAndRoute(weapon) {
             const resultsContainer = document.getElementById('resultsList');
             resultsContainer.innerHTML = '';
 
-            // Show player/team name first
+            // Display player/team name in the intro paragraph
+            const playerNameDisplay = document.getElementById('playerNameDisplay');
             if (userChoices[0]) {
-                const nameItem = document.createElement('div');
-                nameItem.style.marginBottom = '40px';
-                nameItem.style.paddingBottom = '30px';
-                nameItem.style.borderBottom = '3px solid rgba(249, 143, 201, 0.5)';
-                
-                const nameLabel = document.createElement('div');
-                nameLabel.className = 'result-question';
-                nameLabel.textContent = 'Joueur / Équipe :';
-                
-                const nameValue = document.createElement('div');
-                nameValue.className = 'result-answer';
-                nameValue.style.fontSize = '1.3em';
-                nameValue.textContent = userChoices[0];
-                
-                nameItem.appendChild(nameLabel);
-                nameItem.appendChild(nameValue);
-                resultsContainer.appendChild(nameItem);
+                playerNameDisplay.textContent = userChoices[0] + ',';
+            } else {
+                playerNameDisplay.textContent = '';
             }
 
             // Show the 4 investigation answers
